@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<save>
+	<version major="4" minor="0" revision="9" build="331" lslib_meta="v1,bswap_guids" />
+	<region id="CharacterVisualBank">
+		<node id="CharacterVisualBank" />
+	</region>
+	<region id="VisualBank">
+		<node id="VisualBank" />
+	</region>
+	<region id="MaterialBank">
+		<node id="MaterialBank" />
+	</region>
+	<region id="TextureBank">
+		<node id="TextureBank" />
+	</region>
+	<region id="MaterialPresetBank">
+		<node id="MaterialPresetBank" />
+	</region>
+	<region id="VirtualTextureBank">
+		<node id="VirtualTextureBank" />
+	</region>
+	<region id="EffectBank">
+		<node id="EffectBank" />
+	</region>
+</save>

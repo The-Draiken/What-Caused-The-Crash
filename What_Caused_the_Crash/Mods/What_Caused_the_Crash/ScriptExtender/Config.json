@@ -1,0 +1,5 @@
+{
+    "RequiredVersion": 30,
+    "ModTable": "What_Caused_the_Crash",
+    "FeatureFlags": ["Lua"]
+}

@@ -1,0 +1,8 @@
+new entry "WCC_FROZEN"
+type "StatusData"
+data "StatusType" "INCAPACITATED"
+using "FROZEN"
+data "StackId" "WCC_FROZEN"
+data "Boosts" "Invulnerable();Tag(AI_IGNORED_TARGET)"
+data "StatusPropertyFlags" "DisableOverhead;DisableCombatlog;FreezeDuration;Blind;AllowLeaveCombat;AllowLeaveDisallowJoinCombat"
+data "RemoveEvents" ""

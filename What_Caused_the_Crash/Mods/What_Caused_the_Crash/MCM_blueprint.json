@@ -1,0 +1,138 @@
+{
+  "SchemaVersion": 1,
+  "Tabs": [
+    {
+      "TabId": "crashSettings",
+      "TabName": "What Caused the Crash",
+      "Sections": [
+        {
+          "SectionId": "freeze",
+          "SectionName": "Freeze fights the party isn't in",
+          "Settings": [
+            {
+              "Id": "FreezeForeignCombats",
+              "Name": "Freeze combats the party is not part of",
+              "Type": "checkbox",
+              "Default": false,
+              "Description": "NPC-vs-NPC fights with no party member in them are held: their characters can't act or move. They are released automatically when a party member joins or gets close, and all of them are released when you untick this."
+            },
+            {
+              "Id": "AutoFreezeOnDanger",
+              "Name": "Freeze them only when a performance warning fires",
+              "Type": "checkbox",
+              "Default": false,
+              "Description": "Waits for the mod to detect freezing/stalling, then freezes the busiest fights the party isn't in."
+            },
+            {
+              "Id": "ReleaseDistance",
+              "Name": "Release distance (meters)",
+              "Type": "slider_int",
+              "Default": 25,
+              "Description": "A frozen fight is released when a party member is this close to any of its NPCs.",
+              "Options": {
+                "Min": 5,
+                "Max": 100
+              }
+            },
+            {
+              "Id": "PauseFightDuringLoad",
+              "Name": "Pause the fight during loading (resumes by itself)",
+              "Type": "checkbox",
+              "Default": false,
+              "Description": "When a save made during a fight is loaded, that fight is paused as soon as the level starts, so it does not compete with the game for CPU and memory while the load finishes. It resumes by itself once the game has run smoothly for 3 seconds (never sooner than 2 seconds after the level is ready, at the latest 60 seconds after). Nothing else changes. Off by default. If \"Pause a fight that was saved in progress\" below is also ticked, that one wins and the fight stays paused until you untick it."
+            },
+            {
+              "Id": "PauseRestoredFight",
+              "Name": "Pause a fight that was saved in progress (until you untick it)",
+              "Type": "checkbox",
+              "Default": false,
+              "Description": "For a save made during a fight that crashes a few seconds after loading: as soon as the level starts, the fight that came back with the save is paused with the game's own combat pause, so none of it is processed. While it is paused, attacks and throws start their animation and stop. Untick this option (or type !wcc_resume_fight in the Script Extender console) to continue the fight, then save once it is over. The load can sit on a black screen for a while. Off by default; it helped with one save that crashed every time, but it is not known to fix every such crash."
+            }
+          ]
+        },
+        {
+          "SectionId": "scene",
+          "SectionName": "Scene snapshots (copy a scene into another save) - the list of captures is in the Scene snapshots tab",
+          "Settings": [
+            {
+              "Id": "CaptureSceneOnLoad",
+              "Name": "Capture the scene on the next load",
+              "Type": "checkbox",
+              "Default": false,
+              "Description": "When the next save loads, capture where every character within 60 m of your party stands, their HP, statuses and life or death, the party's inventory, equipment, experience, spell slots, cooldowns and approval, and (with the option below) the objects and ground around them. It is written as soon as the level starts, before anything later in the load can crash, and added to the list in the Scene snapshots tab. The option then switches itself off, so loading the earlier save afterwards does not capture again."
+            },
+            {
+              "Id": "CaptureEnvironment",
+              "Name": "Capture the environment",
+              "Type": "checkbox",
+              "Default": true,
+              "Description": "Also capture the objects lying around within 60 m: doors, chandeliers, braziers, crates and the like, with whether each is destroyed, open, locked, burning or has other statuses. Recreating destroys what was destroyed, opens, closes, locks and unlocks doors and chests, and puts the statuses back. Something destroyed in the earlier save but not in the capture cannot be repaired."
+            },
+            {
+              "Id": "CaptureSurfaces",
+              "Name": "Capture ground surfaces (approximate)",
+              "Type": "checkbox",
+              "Default": true,
+              "Description": "Also note the surface (fire, oil, water, blood...) under each captured character and object and recreate small patches of it. This is approximate: only those spots are sampled, and how long a surface had left cannot be read, so recreated ones last a few turns."
+            },
+            {
+              "Id": "CaptureWholeLevel",
+              "Name": "Also capture the whole level (slower)",
+              "Type": "checkbox",
+              "Default": false,
+              "Description": "Extensive: also records every dead character anywhere in the level and every item in the level with the inventory that holds it. Recreating the scene then kills those characters and moves their bodies to where they lay, deletes items that were destroyed or used up, and moves items that were picked up, looted or dropped to where they ended up. Living characters outside the 60 m room are never touched. Reading every item in a level takes noticeably longer and makes a much larger snapshot file. Items that only exist in the captured save (new loot) are not created, and items sent to camp from another area cannot be tracked."
+            },
+            {
+              "Id": "PauseBeforeCapture",
+              "Name": "Pause the game before capturing",
+              "Type": "checkbox",
+              "Default": false,
+              "Description": "Pauses the game the moment the level starts (the same engine pause that pause mods use) and then captures, so a save that crashes shortly after loading has as much time as possible for a large capture. When the capture is finished a message box appears: press OK to resume the game. If you do nothing it resumes by itself after a minute (!wcc_scene_unpause in the Script Extender console also resumes it). Only pauses when a capture is actually going to run. It is not known whether pausing stops every crash: a crash during the load itself can still happen before the pause takes effect, so leave this off if captures already work."
+            },
+            {
+              "Id": "RecreateSceneNow",
+              "Name": "Recreate the selected capture now (tick to run)",
+              "Type": "checkbox",
+              "Default": false,
+              "Description": "Recreates the capture marked [selected] in the Scene snapshots tab; it unticks itself. The tab has a button for each capture, and !wcc_scene_apply in the Script Extender console does the same."
+            }
+          ]
+        },
+        {
+          "SectionId": "partyscan",
+          "SectionName": "Find what breaks the dice-roll screen",
+          "Settings": [
+            {
+              "Id": "ScanPartyStatsNow",
+              "Name": "Scan the party's stats now",
+              "Type": "checkbox",
+              "Default": false,
+              "Description": "Tick once: the box unticks itself when the scan is done and the result is written to the file below (no message box) (ticking again within 15 seconds is ignored). Checks every passive, status and equipped item the party has (and what they grant) and ranks the ones most likely to crash the dice-roll screen. Full list: Script Extender/WhatCausedTheCrash/party_stat_scan.txt. Console: !wcc_scan_party"
+            },
+            {
+              "Id": "ScanMissingNow",
+              "Name": "Scan inventories and statuses for missing things",
+              "Type": "checkbox",
+              "Default": false,
+              "Description": "Tick once: goes through every party member's inventory (bags included), statuses and passives and lists anything the game cannot find - items whose template or stat entry no longer exists or whose name shows 'Not Found', statuses and passives with no stat entry. Unticks itself. Result (no message box): Script Extender/WhatCausedTheCrash/missing_scan.txt. Console: !wcc_scan_missing"
+            },
+            {
+              "Id": "DeleteMissingNow",
+              "Name": "Delete what the scan found",
+              "Type": "checkbox",
+              "Default": false,
+              "Description": "MAKE A NEW SAVE FIRST. Removes everything the last missing-things scan listed (items deleted, statuses and passives removed), after checking each one is still missing. Only works after a scan in the same session. Unticks itself. Console: !wcc_delete_missing all  (or one number from the list, e.g. !wcc_delete_missing 3)"
+            },
+            {
+              "Id": "ListInventoryNow",
+              "Name": "List my character's inventory",
+              "Type": "checkbox",
+              "Default": false,
+              "Description": "Tick once: writes every item your character carries (bags included) with its template, stat entry and the mod it comes from, numbered, to Script Extender/WhatCausedTheCrash/inventory_list.txt. Dice-related and not-found items are marked. Then use the console to send items to the camp chest: !wcc_stash dice | !wcc_stash 3 7 12 | !wcc_stash 1-40 | !wcc_stash half1 / half2. Another party member: !wcc_list_inventory karl"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
