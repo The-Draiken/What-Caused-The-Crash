@@ -115,4 +115,4 @@ Please read these.
 Put this mod at the very top of your load order, above everything, including MCM. Ignore MCM's warning and tell it not to show again.
 
 ## Questions
-You can ask me questions at https://rpghq.org/forums/viewtopic.php?t=6786-what-caused-the-crash directly. (I advise you to not go through the forum itself as people there are unhinged)
+You can ask me questions at (https://rpghq.org/forums/viewtopic.php?p=433603-what-caused-the-crash-2-2-baldur-s-gate-3#p433603) directly. (I advise you to not go through the forum itself as people there are unhinged)
