@@ -2,7 +2,7 @@
 
 Diagnostic and recovery tool for heavily modded Baldur's Gate 3.
 
-I made this because I run a 1300+ mod list on aging hardware. The game would lag hard or crash and I'd have no idea what just happened. This mod is the black-box recorder for that situation. It does **not** magically stop every crash. It tells you what the game was doing right before it died so you can find the culprit, disable it, or report it properly.
+I made this because I run a 1300+ mod list. The game would lag hard or crash and I'd have no idea what just happened. This mod is the black-box recorder for that situation. It does **not** magically stop every crash. It tells you what the game was doing right before it died so you can find the culprit, disable it, or report it properly.
 
 ---
 
